@@ -1,3 +1,3 @@
-# React Reduc Server Side Bootstrap
+# React Redux Server Side Bootstrap
 
 - React Router DOM
