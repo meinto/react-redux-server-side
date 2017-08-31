@@ -1,21 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './utils'
+import React, { Component } from 'react'
+import { 
+  BrowserRouter as Router,
+  Link,
+  Route,
+} from 'react-router-dom'
+
+import DummySidebar from './components/dummy/DummySidebar'
+import DummyPage from './components/dummy/DummyPage'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <Router>
+
+        <div>
+          <DummySidebar />
+          <Route exact={true} path='/' render={() => {
+            return (
+              <DummyPage
+                title={'Home'}
+              />
+            )
+          }}/>
+          <Route path='/page/:pageId' component={DummyPage} />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </Router>
     );
   }
 }
 
-export default App;
+export default App
