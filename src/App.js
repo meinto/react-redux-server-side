@@ -1,8 +1,7 @@
 import './utils'
 import React, { Component } from 'react'
-import { 
+import {
   BrowserRouter as Router,
-  Link,
   Route,
 } from 'react-router-dom'
 
@@ -26,7 +25,7 @@ class App extends Component {
           <Route path='/page/:pageId' component={DummyPage} />
         </div>
       </Router>
-    );
+    )
   }
 }
 
