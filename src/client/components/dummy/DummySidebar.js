@@ -7,9 +7,9 @@ const DummySidebar = () => {
     <div style={styles.container}>
       <h2>My Sidebar</h2>
       <p><Link to='/'>Home</Link></p>
-      {DUMMY_PAGE_DATA.map(data => {
+      {DUMMY_PAGE_DATA.map((data, index) => {
         return (
-          <p>
+          <p key={index}>
             <Link to={`/page/${data.id}`}>
               {data.title}
             </Link>
@@ -28,7 +28,7 @@ const styles = {
     overflow: 'hidden',
     padding: 20,
     float: 'left',
-  }
+  },
 }
 
 export default DummySidebar

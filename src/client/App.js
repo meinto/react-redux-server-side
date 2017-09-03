@@ -1,28 +1,23 @@
-import './../utils/index'
 import React, { Component } from 'react'
-import { render } from 'react-dom'
-import {
-  BrowserRouter,
-} from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
 import PropTypes from 'prop-types'
+import { renderRoutes } from 'react-router-config'
 
 import DummySidebar from './components/dummy/DummySidebar'
 
 class App extends Component {
 
   static propTypes = {
-    routes: PropTypes.array,
+    route: PropTypes.object,
   }
 
   render() {
     return (
-      <BrowserRouter>
+      <div>
         <DummySidebar />
-        {renderRoutes(this.props.routes)}
-      </BrowserRouter>
+        {renderRoutes(this.props.route.routes)}
+      </div>
     )
   }
 }
 
-render(<App />, document.querySelector('#app'))
+export default App

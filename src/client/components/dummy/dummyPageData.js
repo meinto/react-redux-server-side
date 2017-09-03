@@ -11,5 +11,5 @@ export const DUMMY_PAGE_DATA = [
   {
     id: 3,
     title: 'works',
-  }
+  },
 ]
