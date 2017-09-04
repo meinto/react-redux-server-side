@@ -32,11 +32,11 @@ module.exports = [
       ],
     },
 
-    plugins: [
-      new CopyWebpackPlugin([
-        { from: './src/index.html' },
-      ]),
-    ],
+    // plugins: [
+    //   new CopyWebpackPlugin([
+    //     { from: './src/index.html' },
+    //   ]),
+    // ],
   },
   {
 
@@ -66,10 +66,10 @@ module.exports = [
       ],
     },
 
-    plugins: [
-      new CopyWebpackPlugin([
-        { from: './src/index.html' },
-      ]),
-    ],
+    // plugins: [
+    //   new CopyWebpackPlugin([
+    //     { from: './src/index.html' },
+    //   ]),
+    // ],
   },
 ]

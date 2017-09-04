@@ -1,6 +1,6 @@
 import App from './../App'
 import DummyPage from './../components/dummy/DummyPage'
-import Home from './../components/dummy/DummyHome'
+import Counter from './../containers/dummy/DummyCounterContainer'
 
 
 export const routes = [
@@ -9,7 +9,7 @@ export const routes = [
     routes: [
       {
         path: '/',
-        component: Home,
+        component: Counter,
         exact: true,
       },
       {
