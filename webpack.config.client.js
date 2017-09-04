@@ -1,0 +1,36 @@
+var CopyWebpackPlugin = require('copy-webpack-plugin')
+
+module.exports = {
+
+  entry: './src/client/ClientApp.js',
+
+  output: {
+    filename: 'client.js',
+    path: __dirname + '/dist/assets/js',
+  },
+
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+
+  node: {
+    fs: 'empty', // fix for -> Can't resolve 'fs' in ... node_modules
+    net: 'empty', // fix for -> Can't resolve 'net' in ... node_modules
+  },
+
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: ['babel-loader'],
+      },
+    ],
+  },
+
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: __dirname + '/src/client/assets', to: __dirname + '/dist/assets' },
+    ]),
+  ],
+}
