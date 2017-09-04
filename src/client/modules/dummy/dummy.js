@@ -25,7 +25,7 @@ export const reset = () => {
   }
 }
 
-const initialState = 0
+const initialState = 15
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case ACTION_TYPES.ADD:

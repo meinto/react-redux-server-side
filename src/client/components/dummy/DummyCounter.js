@@ -8,7 +8,7 @@ class Counter extends PureComponent {
     count: PropTypes.number,
 
     add: PropTypes.func,
-    substact: PropTypes.func,
+    substract: PropTypes.func,
     reset: PropTypes.func,
   }
 
@@ -16,12 +16,12 @@ class Counter extends PureComponent {
     count: 0,
 
     add: () => {},
-    substact: () => {},
+    substract: () => {},
     reset: () => {},
   }
 
   _getNumberFromInput = () => {
-    return this.input.value || 0
+    return parseInt(this.input.value) || 0
   }
 
   _add = () => {
@@ -31,7 +31,7 @@ class Counter extends PureComponent {
 
   _substract = () => {
     const number = this._getNumberFromInput()
-    this.props.substact(number)
+    this.props.substract(number)
   }
 
   _reset = () => {

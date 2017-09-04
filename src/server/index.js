@@ -8,6 +8,10 @@ import { renderToString } from 'react-dom/server'
 
 import ServerApp from './ServerApp'
 
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import rootReducer from './../client/modules/root/index'
+
 const app = express()
 
 app.locals.pretty = true
@@ -26,16 +30,23 @@ app.use('/client.js', (req, res) => {
 
 
 app.use('*', (req, res) => {
-  let context = {} // eslint-disable-line
+  const context = {}
+
+  const store = createStore(rootReducer)
 
   const content = renderToString(
-    <ServerApp
-      location={req.originalUrl}
-      context={context}
-    />
+    <Provider store={store}>
+      <ServerApp
+        location={req.originalUrl}
+        context={context}
+      />
+    </Provider>
   )
+
+  // Grab the initial state from our Redux store
+  const preloadedState = store.getState()
   
-  res.send(renderFullPage(content))
+  res.send(renderFullPage(content, preloadedState))
 })
 
 function renderFullPage(html, preloadedState = {}) {

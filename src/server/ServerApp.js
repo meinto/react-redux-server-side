@@ -2,9 +2,7 @@ import './../utils/index'
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { renderRoutes } from 'react-router-config'
-import {
-  StaticRouter,
-} from 'react-router-dom'
+import { StaticRouter } from 'react-router-dom'
 
 import { routes } from './../client/config/routes'
 
