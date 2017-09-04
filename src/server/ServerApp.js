@@ -6,7 +6,7 @@ import {
   StaticRouter,
 } from 'react-router-dom'
 
-import { routes } from './config/routes'
+import { routes } from './../client/config/routes'
 
 class ServerApp extends PureComponent {
 

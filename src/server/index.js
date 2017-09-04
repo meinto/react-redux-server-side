@@ -6,7 +6,7 @@ import bodyParser from 'body-parser'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 
-import ServerApp from './../client/ServerApp'
+import ServerApp from './ServerApp'
 
 const app = express()
 
