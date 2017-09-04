@@ -20,13 +20,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use(express.static(__dirname + '/public'))
-
-// dont know how to do this better :/
-app.use('/client.js', (req, res) => {
-  const pathToClientJS = path.resolve('./dist/client.js')
-  res.sendFile(pathToClientJS)
-})
+app.use(express.static(path.resolve('./dist/assets')))
 
 
 app.use('*', (req, res) => {
@@ -55,6 +49,7 @@ function renderFullPage(html, preloadedState = {}) {
     <html>
       <head>
         <title>Redux Universal Example</title>
+        <link rel="stylesheet" href="/css/foundation.min.css">
       </head>
       <body>
         <div id="app">${html}</div>
@@ -63,7 +58,7 @@ function renderFullPage(html, preloadedState = {}) {
           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>
-        <script src="/client.js"></script>
+        <script src="/js/client.js"></script>
       </body>
     </html>
     `

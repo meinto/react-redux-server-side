@@ -44,7 +44,7 @@ module.exports = [
 
     output: {
       filename: 'client.js',
-      path: __dirname + '/dist',
+      path: __dirname + '/dist/assets/js',
     },
 
     resolve: {
@@ -66,10 +66,10 @@ module.exports = [
       ],
     },
 
-    // plugins: [
-    //   new CopyWebpackPlugin([
-    //     { from: './src/index.html' },
-    //   ]),
-    // ],
+    plugins: [
+      new CopyWebpackPlugin([
+        { from: __dirname + '/src/client/assets', to: __dirname + '/dist/assets' },
+      ]),
+    ],
   },
 ]

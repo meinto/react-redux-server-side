@@ -15,7 +15,8 @@
     "react-router-dom": "4.2.2",
     "react-scripts": "1.0.12",
     "redux": "3.7.2",
-    "request": "2.81.0"
+    "request": "2.81.0",
+    "styled-components": "^2.1.2"
   },
   "scripts": {
     "start": "node ./src/server.js",
