@@ -48,7 +48,8 @@ function renderFullPage(html, preloadedState = {}) {
     <!doctype html>
     <html>
       <head>
-        <title>Redux Universal Example</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>React Redux Server Side Example</title>
         <link rel="stylesheet" href="/css/foundation.min.css">
       </head>
       <body>

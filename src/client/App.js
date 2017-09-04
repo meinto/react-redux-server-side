@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { renderRoutes } from 'react-router-config'
 
+import { Column, Row } from './components/atoms/Grid'
 import DummySidebar from './components/dummy/DummySidebar'
 
 class App extends Component {
@@ -12,10 +13,12 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Row>
         <DummySidebar />
-        {renderRoutes(this.props.route.routes)}
-      </div>
+        <Column small-12 medium-8>
+          {renderRoutes(this.props.route.routes)}
+        </Column>
+      </Row>
     )
   }
 }
