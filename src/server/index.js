@@ -7,6 +7,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 
 import ServerApp from './ServerApp'
+import Head from './Head'
 
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
@@ -20,7 +21,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use(express.static(path.resolve('./dist/assets')))
+app.use(express.static(path.resolve('./dist/static')))
 
 
 app.use('*', (req, res) => {
@@ -28,7 +29,7 @@ app.use('*', (req, res) => {
 
   const store = createStore(rootReducer)
 
-  const content = renderToString(
+  const ContentComponent = renderToString(
     <Provider store={store}>
       <ServerApp
         location={req.originalUrl}
@@ -39,32 +40,31 @@ app.use('*', (req, res) => {
 
   // Grab the initial state from our Redux store
   const preloadedState = store.getState()
+
+  const HeadComponent = renderToString(
+    <Head
+      title={'test title'} // later grabbed from preloaded state
+    />
+  )
   
-  res.send(renderFullPage(content, preloadedState))
+  res.send(renderFullPage(ContentComponent, HeadComponent, preloadedState))
 })
 
-function renderFullPage(html, preloadedState = {}) {
+function renderFullPage(ContentComponent, HeadComponent, preloadedState = {}) {
   return `
     <!doctype html>
     <html>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>React Redux Server Side Example</title>
-        <link rel="stylesheet" href="/css/foundation.min.css">
-      </head>
+      ${HeadComponent}
       <body>
-        <div id="app">${html}</div>
-        <script>
-          // WARNING: See the following for security issues around embedding JSON in HTML:
-          // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
-          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
-        </script>
-        <script src="/js/client.js"></script>
+        <div id="app">${ContentComponent}</div>
       </body>
     </html>
+    <script src="/client.js"></script>
+    <script>window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}</script>
     `
 }
 
-app.listen(3000, () => {
-  console.log('server is up on port 3000')
+
+app.listen(8080, () => {
+  console.log('server is up on port 8080')
 })

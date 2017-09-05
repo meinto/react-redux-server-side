@@ -15,9 +15,11 @@ class ServerApp extends PureComponent {
 
   render() {
     return (
+      
       <StaticRouter location={this.props.location} context={this.props.context}>
         {renderRoutes(routes)}
       </StaticRouter>
+          
     )
   }
 }
