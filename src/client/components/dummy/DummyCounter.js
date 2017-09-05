@@ -48,7 +48,7 @@ class Counter extends PureComponent {
         />
         <button
           onClick={this._add}
-        >+1</button>
+        >ADD!</button>
         <button
           onClick={this._substract}
         >SUBSTRACT</button>
