@@ -2,7 +2,11 @@
 
 - React Router DOM
 - Redux
+- React Router Redux
+- Apollo
+- Redux Observables
 - SSR (Server Sider Rendering)
+- Helmet
 - Hot Reloading
 
 ## Usage
@@ -16,6 +20,9 @@ npm run build
 
 # build and start - prod (client & server)
 npm start
+
+# run dev server
+npm run server:dev
 ```
 
 The index.html in the root only effect the dev environment.
