@@ -14,6 +14,8 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
 
+  target: 'node',
+
   node: {
     fs: 'empty', // fix for -> Can't resolve 'fs' in ... node_modules
     net: 'empty', // fix for -> Can't resolve 'net' in ... node_modules

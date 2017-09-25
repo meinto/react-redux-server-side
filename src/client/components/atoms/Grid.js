@@ -6,6 +6,7 @@ export class Column extends PureComponent {
 
   static propTypes = {
     children: PropTypes.any,
+    dev: PropTypes.bool,
   }
   
   _getClasses = () => {
@@ -17,7 +18,7 @@ export class Column extends PureComponent {
 
   render() {
     return (
-      <div className={`${this._getClasses().join(' ')} columns`}>
+      <div className={`${this._getClasses().join(' ')} columns`} style={this.props.dev ? styles.dev : null}>
         {this.props.children}
       </div>
     )
@@ -28,14 +29,23 @@ export class Row extends PureComponent {
 
   static propTypes = {
     children: PropTypes.any,
+    dev: PropTypes.bool,
   }
 
   render() {
     return (
-      <div className={'row'}>
+      <div className={'row'} style={this.props.dev ? styles.dev : null}>
         {this.props.children}
       </div>
     )
   }
 
+}
+
+const styles = {
+  dev: {
+    borderWidth: 1,
+    borderColor: 'black',
+    borderStyle: 'solid',
+  },
 }

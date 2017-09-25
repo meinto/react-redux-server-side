@@ -1,32 +1,41 @@
+'use strict'
+
+import 'babel-polyfill'
+global.regeneratorRuntime = require('regenerator-runtime/runtime')
+
+import 'rxjs'
 import './../utils/index'
 import 'react-hot-loader/patch'
 import React from 'react'
 import { AppContainer } from 'react-hot-loader'
 import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import createHistory from 'history/createBrowserHistory'
 
-import ClientApp from './ClientApp'
-import rootReducer from './modules/root/index'
-const store = createStore(rootReducer)
+import { configureStore } from './config/store'
+import App from './App'
+
+const history = createHistory()
+const store = configureStore({}, {
+  history,
+})
 
 
-function renderWithHotReload(RootElement) {
+function renderWithHotReload(ContentElement) {
   render(
     <AppContainer>
-      <Provider store={store}>
-        <RootElement />
-      </Provider>
-    </AppContainer>
-    , document.querySelector('#app')
+      <ContentElement
+        store={store}
+        history={history}
+      />
+    </AppContainer>, document.querySelector('#app')
   )
 }
 
-renderWithHotReload(ClientApp)
+renderWithHotReload(App)
 
 if (module.hot) {
-  module.hot.accept('./ClientApp', () => {
-    const NextRoot = require('./ClientApp.js').default
-    renderWithHotReload(NextRoot)
+  module.hot.accept('./App', () => {
+    const ContentElement = require('./App.js').default
+    renderWithHotReload(ContentElement)
   })
 }

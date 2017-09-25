@@ -1,26 +1,49 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { StaticRouter } from 'react-router-dom'
+import { ConnectedRouter } from 'react-router-redux'
 import { renderRoutes } from 'react-router-config'
+import { Provider } from 'react-redux'
+import PropTypes from 'prop-types'
 
-import { Column, Row } from './components/atoms/Grid'
-import DummySidebar from './components/dummy/DummySidebar'
+import { routes } from './config/routes'
+import Header from './components/Header'
 
-class App extends Component {
 
+class ClientApp extends Component {
   static propTypes = {
-    route: PropTypes.object,
+    isClient: PropTypes.bool,
+    location: PropTypes.string,
+    context: PropTypes.object,
+    store: PropTypes.object,
+    history: PropTypes.object,
+  }
+
+  static defaultProps = {
+    isClient: true,
+    location: '',
+    context: {},
   }
 
   render() {
     return (
-      <Row>
-        <DummySidebar />
-        <Column small-12 medium-8>
-          {renderRoutes(this.props.route.routes)}
-        </Column>
-      </Row>
+      <Provider store={this.props.store}>
+        <div>
+          <Header />
+          {this.props.isClient && (
+            <ConnectedRouter history={this.props.history}>
+              {renderRoutes(routes)}
+            </ConnectedRouter>
+          )}
+
+          {!this.props.isClient && (
+            <StaticRouter location={this.props.location} context={this.props.context}>
+              {renderRoutes(routes)}
+            </StaticRouter>
+          )}
+        </div>
+      </Provider>
     )
   }
 }
 
-export default App
+export default ClientApp

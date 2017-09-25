@@ -58,7 +58,7 @@ module.exports = {
     "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
     "no-lonely-if": "error",
     "no-mixed-spaces-and-tabs": "error",
-    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 1 }],
+    "no-multiple-empty-lines": ["error", { "max": 2 }],
     "space-infix-ops": "error",
     "eol-last": "error",
     "indent": [
@@ -87,11 +87,6 @@ module.exports = {
     "react/jsx-no-duplicate-props": [
       "error", { "ignoreCase": true }
     ],
-    "react/display-name": 0,
-    "react-native/no-unused-styles": 2,
-    "react-native/split-platform-components": 0,
-    "react-native/no-inline-styles": 2,
-    "react-native/no-color-literals": 0,
-
+    "react/display-name": 0
   }
 };

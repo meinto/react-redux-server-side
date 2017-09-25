@@ -1,3 +1,12 @@
+import '../utils'
+import 'babel-polyfill'
+global.regeneratorRuntime = require('regenerator-runtime/runtime')
+
+// for redux observables support
+import 'rxjs'
+// fetch polyfill for node
+import 'isomorphic-fetch'
+
 import express from 'express'
 import path from 'path'
 import cookieParser from 'cookie-parser'
@@ -6,12 +15,9 @@ import bodyParser from 'body-parser'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 
-import ServerApp from './ServerApp'
-import Head from './Head'
-
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import rootReducer from './../client/modules/root/index'
+import SSR from './dependencies/SSR'
+import App from '../client/App'
+import { configureStore } from '../client/config/store'
 
 const app = express()
 
@@ -24,37 +30,42 @@ app.use(cookieParser())
 app.use(express.static(path.resolve('./dist/static')))
 
 
-app.use('*', (req, res) => {
+app.use('*', async(req, res) => {
   const context = {}
 
-  const store = createStore(rootReducer)
+  const reduxObservablesSSR = new SSR(req.originalUrl)
+
+  const store = configureStore({}, {
+    middlewares: [reduxObservablesSSR.middleware()],
+    epicOptions: {
+      dependencies: reduxObservablesSSR,
+    },
+  })
+  
+  reduxObservablesSSR.dispatchEpicActions(store)
+
+  await reduxObservablesSSR.loadingComplete()
 
   const ContentComponent = renderToString(
-    <Provider store={store}>
-      <ServerApp
-        location={req.originalUrl}
-        context={context}
-      />
-    </Provider>
+    <App
+      store={store}
+      isClient={false}
+      location={req.originalUrl}
+      context={context}
+    />
   )
 
   // Grab the initial state from our Redux store
   const preloadedState = store.getState()
-
-  const HeadComponent = renderToString(
-    <Head
-      title={'test title'} // later grabbed from preloaded state
-    />
-  )
-  
-  res.send(renderFullPage(ContentComponent, HeadComponent, preloadedState))
+    
+  res.send(renderFullPage(ContentComponent, preloadedState))
 })
 
-function renderFullPage(ContentComponent, HeadComponent, preloadedState = {}) {
+function renderFullPage(ContentComponent, preloadedState = {}) {
   return `
     <!doctype html>
     <html>
-      ${HeadComponent}
+      <head></head>
       <body>
         <div id="app">${ContentComponent}</div>
       </body>
@@ -66,5 +77,5 @@ function renderFullPage(ContentComponent, HeadComponent, preloadedState = {}) {
 
 
 app.listen(8080, () => {
-  console.log('server is up on port 8080')
+  console.log('server is up on port 8080') // eslint-disable-line
 })

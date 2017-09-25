@@ -1,7 +1,5 @@
-import { combineReducers } from 'redux'
+import reducer from './reducer'
+import epic from './epic'
 
-import dummy from './../dummy/dummy'
-
-export default combineReducers({
-  dummy,
-})
+export default reducer
+export { epic }

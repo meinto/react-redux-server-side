@@ -8,3 +8,5 @@ export const idx = (input, callback) => {
     return null
   }
 }
+
+global.idx = idx
