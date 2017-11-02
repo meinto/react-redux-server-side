@@ -3,9 +3,9 @@ import { createEpicMiddleware } from 'redux-observable'
 import { routerMiddleware as createRouterMiddleware } from 'react-router-redux'
 import { SSR_DEPENDENCIES_MOCK } from 'redux-observables-server-side-rendering'
 
-import { isProduction } from './env'
+// import { isProduction } from './env'
 import { createRouterDataLoadingMiddleware } from '../middlewares/routerDataLoading'
-import { createAnalyticsMiddleware } from '../middlewares/analytics'
+// import { createAnalyticsMiddleware } from '../middlewares/analytics'
 import rootReducer, { epic as rootEpic } from '../modules/root'
 
 const initalOptions = {
@@ -27,8 +27,8 @@ export const configureStore = (initialState = {}, options = initalOptions) => {
     middlewares = [...middlewares, createRouterDataLoadingMiddleware()]
   }
 
-  if (isProduction())
-    middlewares = [...middlewares, createAnalyticsMiddleware()]
+  // if (isProduction())
+  //   middlewares = [...middlewares, createAnalyticsMiddleware()]
 
   // its important that the ssr middleware stands at the last place of the array
   if (_options.middlewares.length > 0)

@@ -3,12 +3,9 @@ import { ConnectedRouter } from 'react-router-redux'
 import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
 import PropTypes from 'prop-types'
-import ga from 'react-google-analytics'
 
 import { routes } from './config/routes'
 import Header from './components/Header'
-
-const GAInitiailizer = ga.Initializer
 
 
 class ClientApp extends Component {
@@ -37,7 +34,6 @@ class ClientApp extends Component {
         <div>
           <ConnectedRouter {...routerProps}>
             <div>
-              <GAInitiailizer />
               <Header />
               {renderRoutes(routes)}
             </div>
