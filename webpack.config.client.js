@@ -1,3 +1,4 @@
+var webpack = require('webpack')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
@@ -30,6 +31,13 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({ // <-- key to reducing React's size
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin(), //minify everything
+    new webpack.optimize.AggressiveMergingPlugin(), //Merge chunks 
     new CopyWebpackPlugin([
       { from: __dirname + '/src/client/assets/', to: __dirname + '/dist/static/' },
     ]),

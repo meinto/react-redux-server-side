@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
 
+import router from '../router'
+import seo from '../seo'
 import dummy from './../dummy/dummy'
 
 export default combineReducers({
+  seo,
   dummy,
-  router: routerReducer,
+  router,
 })

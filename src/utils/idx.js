@@ -4,7 +4,6 @@ export const idx = (input, callback) => {
     const result = callback(input)
     return result
   } catch (error) {
-    console.log(error)
     return null
   }
 }

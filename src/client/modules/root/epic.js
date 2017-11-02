@@ -1,7 +1,9 @@
 import { combineEpics } from 'redux-observable'
-// import epic$ from '../performers/epics'
+import routerEpic$ from '../router/epic'
+import pageEpic$ from '../page/epic'
 
 
 export default combineEpics(
-  // epic$
+  pageEpic$,
+  routerEpic$,
 )

@@ -1,3 +1,4 @@
+var webpack = require('webpack')
 var nodeExternals = require('webpack-node-externals')
 
 module.exports = {
@@ -30,4 +31,12 @@ module.exports = {
       },
     ],
   },
+
+  plugins: [
+    new webpack.DefinePlugin({ // <-- key to reducing React's size
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      },
+    }),
+  ],
 }

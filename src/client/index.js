@@ -14,8 +14,14 @@ import createHistory from 'history/createBrowserHistory'
 import { configureStore } from './config/store'
 import App from './App'
 
+// Grab the state from a global variable injected into the server-generated HTML
+const preloadedState = window.__PRELOADED_STATE__
+
+// Allow the passed state to be garbage-collected
+delete window.__PRELOADED_STATE__
+
 const history = createHistory()
-const store = configureStore({}, {
+const store = configureStore(preloadedState, {
   history,
 })
 
