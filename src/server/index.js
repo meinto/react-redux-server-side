@@ -39,6 +39,7 @@ app.use(cookieParser())
 
 app.use('*.(jpg|jpeg|png|gif)', wrapAsync(imageCache))
 app.use(express.static(path.resolve('./dist/static')))
+app.use(express.static(path.resolve('./public/static')))
 
 
 app.use('*', wrapAsync(async(req, res) => {

@@ -39,7 +39,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin(), //minify everything
     new webpack.optimize.AggressiveMergingPlugin(), //Merge chunks 
     new CopyWebpackPlugin([
-      { from: __dirname + '/src/client/assets/', to: __dirname + '/dist/static/' },
+      { from: __dirname + '/src/client/assets/', to: __dirname + '/public/static/' },
     ]),
   ],
 }

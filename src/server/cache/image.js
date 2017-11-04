@@ -42,8 +42,9 @@ export const extractDimensions = req => {
   return { width, height }
 }
 
-const rawImageDir = path.resolve('./dist/static')
-const cacheDir = path.resolve('./dist/static/cache')
+// TODO: multiple lookup dirs
+const rawImageDir = path.resolve('./public')
+const cacheDir = path.resolve('./public/cache')
 export const imageCache = async(req, res) => {
   const relativeImagePath = req.originalUrl.split('?').shift()
   const fullImagePath = path.resolve(rawImageDir + relativeImagePath)

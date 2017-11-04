@@ -11,7 +11,7 @@ module.exports = Object.assign(merge.smart(webpackClient, {
   plugins: [
     new DashboardPlugin(),
     new CopyWebpackPlugin([
-      { from: __dirname + '/src/client/assets/', to: __dirname + '/dist/static/' },
+      { from: __dirname + '/src/client/assets/', to: __dirname + '/public/static/' },
     ]),
     new webpack.DefinePlugin({
       'process.env': {
