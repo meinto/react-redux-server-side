@@ -47,6 +47,13 @@ export const processApp = (store, history, res, req, cacheName) => {
 }
 
 function renderFullPage(ContentComponent, preloadedState = {}, sheets = {}, styleTags = '', helmet = {}) {
+
+  // TODO: refactor this...
+  const clientJsLink = process.env.NODE_ENV && process.env.NODE_ENV === 'development'
+    ? 'http://localhost:8081/client.js'
+    : '/client.js'
+
+
   return `
     <!doctype html>
     <html ${helmet.htmlAttributes.toString()}>
@@ -65,6 +72,6 @@ function renderFullPage(ContentComponent, preloadedState = {}, sheets = {}, styl
       </body>
     </html>
     <script>window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}</script>
-    <script src="/client.js"></script>
+    <script src="${clientJsLink}"></script>
     `
 }

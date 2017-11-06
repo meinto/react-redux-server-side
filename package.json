@@ -47,7 +47,7 @@
     "forever:stop": "forever stop ./dist/server.js",
     "forever:start": "cross-env NODE_ENV=production forever start ./dist/server.js",
     "forever:restart": "forever restart ./dist/server.js",
-    "dev": "webpack-dashboard -- webpack-dev-server --config webpack.config.dev.js --watch --inline --colors  --port 8080 --hot --history-api-fallback",
+    "dev": "webpack-dev-server --config webpack.config.dev.js --watch --inline --colors  --port 8081 --hot --history-api-fallback",
     "server:dev:mon": "nodemon --exec cross-env NODE_ENV=development babel-node ./src/server",
     "server:dev": "rm -rf ./dist && npm run build:dist && cross-env NODE_ENV=development npm start",
     "build:dist": "npm-run-all --parallel build:client build:server",

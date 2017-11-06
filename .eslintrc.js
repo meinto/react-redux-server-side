@@ -27,6 +27,7 @@ module.exports = {
     "globalBackHandler": true,
     "jasmine": true,
     "idx": true,
+    "process": true,
   },
   "parser": "babel-eslint",
   "rules": {
