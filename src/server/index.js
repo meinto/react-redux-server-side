@@ -49,9 +49,13 @@ app.use('*', wrapAsync(async(req, res) => {
   const cacheDir = path.resolve(publicDir + '/cache')
   createCacheDir(cacheDir)
 
-  const cacheName = getFullCacheFileName(req, cacheDir)
-  if (loadHtmlFromCache(res, cacheName))
-    return
+  // TODO: refactor this
+  let cacheName = ''
+  if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
+    cacheName = getFullCacheFileName(req, cacheDir)
+    if (loadHtmlFromCache(res, cacheName))
+      return
+  }
   
 
   // trailing slash prevention
