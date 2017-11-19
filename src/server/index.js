@@ -29,6 +29,9 @@ import {
 } from './cache/html'
 import { processApp } from './processApp'
 
+// set empty window object to emulate the browser window object
+global.window = {}
+
 const app = express()
 
 app.locals.pretty = true

@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
 import { routerMiddleware as createRouterMiddleware } from 'react-router-redux'
 import { SSR_DEPENDENCIES_MOCK } from 'redux-observables-server-side-rendering'
@@ -34,10 +34,13 @@ export const configureStore = (initialState = {}, options = initalOptions) => {
   if (_options.middlewares.length > 0)
     middlewares = [...middlewares, ..._options.middlewares]
   
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
   const store = createStore(
     rootReducer,
     initialState,
-    applyMiddleware(...middlewares.filter(n => n))
+    composeEnhancers(
+      applyMiddleware(...middlewares.filter(n => n))
+    )
   )
 
   return store
